@@ -1,9 +1,9 @@
 import serial
 import serial.tools.list_ports
-file = '/Users/zoefulton/Downloads/Smartpix_files/Smartpix_code/test_20260326.txt'
-ser = serial.Serial("/dev/cu.usbserial-11210", 9600, timeout=1) # will need to change device name on lab computer
+file = "Users/daq/Downloads/test_28260330.txt"
+ser = serial.Serial("COM3", 9600, timeout=1) # will need to change device name on lab computer
 
-def read_humidity_control_switch(file, humidity):
+def read_humidity_control_switch(file, humidity, temperature):
     humidity_file = open(file, 'r', encoding='latin-1')  # need to change this to path on lab computer
     humidity_data = humidity_file.read()
 
@@ -18,7 +18,7 @@ def read_humidity_control_switch(file, humidity):
     
     # define humidity threshold for turning on/off switch
     def humidity_threshold(humidity):
-        return 50.0
+        return temperature-((100-humidity)/5)
 
     #functions to turn on and off switch 1 based on humidity value
     #ports = serial.tools.list_ports.comports()
